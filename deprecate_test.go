@@ -16,7 +16,7 @@ func Test_Deprecate_NoMessage(t *testing.T) {
 
 	Deprecate(4, "Test_Deprecate_NoMessage", "")
 	act := bb.String()
-	r.True(strings.HasPrefix(act, "[DEPRECATED] Test_Deprecate-NoMessage has been deprecated."))
+	r.True(strings.HasPrefix(act, "[DEPRECATED] Test_Deprecate_NoMessage has been deprecated."))
 	r.Contains(act, "deprecate_test.go:")
 }
 
