@@ -16,12 +16,15 @@ func Deprecate(depth int, name string, msg string) {
 		if depth <= 0 {
 			depth = 5
 		}
-		// for i := 0; i < 10; i++ {
-		// 	_, file, line, _ := runtime.Caller(i)
-		// 	fmt.Println("### i ->", i)
-		// 	fmt.Println("### file ->", file)
-		// 	fmt.Println("### line ->", line)
-		// }
+		i := depth
+		for i > 0 {
+			_, _, line, _ := runtime.Caller(i)
+			if line > 0 {
+				depth = i
+				break
+			}
+			i--
+		}
 		_, file, line, _ := runtime.Caller(depth)
 		fmt.Fprintf(deprecationWriter, "[%s] %s has been deprecated. (%s:%d)\n", deprecated, name, file, line)
 		if len(msg) > 0 {
